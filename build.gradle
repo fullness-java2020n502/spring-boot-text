@@ -36,10 +36,13 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	// postgresql driver
 	runtimeOnly 'org.postgresql:postgresql'
-	// test
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+
+	// テスト（JUnit）
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// lombokをテストで利用可能にする
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.projectlombok:lombok'
 }
 
 test {
