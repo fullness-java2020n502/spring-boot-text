@@ -18,14 +18,25 @@ repositories {
 	mavenCentral()
 }
 
+// 依存関係（外部ライブラリ）の追加した内容
+	// 動的WebコンテンツプロジェクトだとWebContnt/WEB-INF/libに追加していたもの
 dependencies {
+	// thymeleaf
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	// spring mvc
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// aop
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	// spring boot
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.3'
+	// lombok
 	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
+	// devtools
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	// postgresql driver
+	runtimeOnly 'org.postgresql:postgresql'
+	// test
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
