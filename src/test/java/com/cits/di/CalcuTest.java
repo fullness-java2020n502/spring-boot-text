@@ -7,7 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Calcuクラスのテストクラス
@@ -17,7 +16,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 // 下記アノテーションをテストクラスに付与する
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig
 public class CalcuTest {
 	// インスタンス化されたものを代入する場合は
 	// その対象の上に@Autowiredをつける
