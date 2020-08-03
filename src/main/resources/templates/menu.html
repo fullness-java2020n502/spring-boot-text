@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>メニュー画面</title>
+<style>
+* { text-align:center; }
+table { margin:  0 auto; }
+</style>
+</head>
+<body>
+	<h1>メニュー</h1>
+	<p th:text="${message}"></p>
+	<a href="/book-list">書籍情報一覧</a><br>
+	<a href="/book-add">書籍情報登録</a>
+</body>
+</html>

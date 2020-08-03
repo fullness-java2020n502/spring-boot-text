@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+* { text-align:center; }
+table { margin:  0 auto; }
+</style>
+</head>
+<body>
+	<h1>書籍情報一覧</h1>
+	<table border="1">
+		<tr>
+			<th>ID</th>
+			<th>タイトル</th>
+			<th>著者</th>
+			<th>貸出状況</th>
+			<th>更新</th>
+		</tr>
+		<tr th:each="book : ${bookList}">
+			<td th:text="${book.id}"></td>
+			<td th:text="${book.title}"></td>
+			<td th:text="${book.author}"></td>
+			<td th:text="${book.status}"></td>
+			<td>
+				<a th:href="@{/book-rent/__${book.id}__}">
+					<button>更新</button>
+				</a>
+			</td>
+		</tr>
+	</table>
+	<a href="/menu">メニューに戻る</a>
+</body>
+</html>
