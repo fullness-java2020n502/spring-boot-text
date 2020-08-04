@@ -30,7 +30,36 @@
 		<bind name="name" value="'%'+_parameter+'%'" />
 		select * from t_book_category where name like #{name}
 	</select>
-
+	<!-- 全件取得（書籍含む）のresultMap -->
+	<resultMap type="BookCategory" id="selectAllCategoryAndBooks">
+		<id property="id" column="c_id" />
+		<result property="name" column="c_name" />
+		<collection property="books" ofType="Book">
+			<id property="id" column="b_id" />
+			<result property="title" column="b_title" />
+			<result property="author" column="b_author" />
+			<result property="status" column="b_status" />
+			<result property="startDate" column="b_start_date" />
+			<result property="endDate" column="b_end_date" />
+		</collection>
+	</resultMap>
+	<!-- 全件取得（「多」の書籍も含む） -->
+	<select id="selectAllCategoryAndBooks" resultMap="selectAllCategoryAndBooks">
+		select
+			c.id c_id,
+			c.name c_name,
+			b.id b_id,
+			b.title b_title,
+			b.author b_author,
+			b.start_date b_start_date,
+			b.end_date b_end_date
+		from
+			t_book_category c
+		inner join
+			t_book b
+		on
+			c.id = b.category_id;
+	</select>
 
 	<!-- 1件登録 -->
 	<!-- parameterType属性で引数の型（エンティティ）を指定 -->

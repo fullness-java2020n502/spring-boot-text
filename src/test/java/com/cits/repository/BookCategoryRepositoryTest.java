@@ -109,5 +109,14 @@ public class BookCategoryRepositoryTest {
 		assertEquals(1, repository.selectByNameLike("術").size());
 		assertEquals(0, repository.selectByNameLike("雑誌").size());
 	}
+	/**
+	 * 全件取得（書籍含む）テスト<br>
+	 * - 書籍リスト（と書籍リスト）を取得できているか<br>
+	 */
+	@Test
+	@Sql({"/schema.sql","/data.sql"})
+	void selectAllCategoryAndBooks() {
+		repository.selectAllCategoryAndBooks().forEach(System.out::println);
+	}
 
 }

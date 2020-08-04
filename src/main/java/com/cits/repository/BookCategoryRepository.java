@@ -16,6 +16,11 @@ public interface BookCategoryRepository {
 	 */
 	List<BookCategory> selectAll();
 	/**
+	 * 全件取得（「多」の書籍も含む）
+	 * @return
+	 */
+	List<BookCategory> selectAllCategoryAndBooks();
+	/**
 	 * 1件取得
 	 * @param id カテゴリID
 	 * @return 書籍カテゴリ
