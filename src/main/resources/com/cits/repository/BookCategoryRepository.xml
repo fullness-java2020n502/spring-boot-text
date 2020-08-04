@@ -3,24 +3,31 @@
 <mapper namespace="com.cits.repository.BookCategoryRepository">
 	<!-- ここの中にSQLを記述していく -->
 	<!-- 全件取得 -->
-	<select id="selectAll" resultType="com.cits.value.BookCategory"><!-- id属性にメソッド名を入れる -->
+	<select id="selectAll" resultType="BookCategory"><!-- id属性にメソッド名を入れる -->
 		select * from t_book_category
 	</select>
 	<!-- 1件取得 -->
-	<select id="selectById" resultType="com.cits.value.BookCategory">
+	<select id="selectById" resultType="BookCategory">
 		select * from t_book_category where id = #{id}
+	</select>
+	<!-- 1件取得（IDと名前） -->
+	<select id="selectByIdAndName" resultType="BookCategory">
+		select * from t_book_category where id = #{id}
+		<if test="name != null">
+		and name = #{name}
+		</if>
 	</select>
 	<!-- 1件登録 -->
 	<!-- parameterType属性で引数の型（エンティティ）を指定 -->
-	<insert id="insert" parameterType="com.cits.value.BookCategory">
+	<insert id="insert" parameterType="BookCategory">
 		insert into t_book_category values(#{id},#{name})
 	</insert>
 	<!-- 1件更新 -->
-	<update id="updateById" parameterType="com.cits.value.BookCategory">
+	<update id="updateById" parameterType="BookCategory">
 		update t_book_category set name = #{name} where id = #{id}
 	</update>
 	<!-- 1件削除 -->
-	<delete id="deleteById" parameterType="com.cits.value.BookCategory">
+	<delete id="deleteById" parameterType="BookCategory">
 		delete from t_book_category where id = #{id}
 	</delete>
 </mapper>

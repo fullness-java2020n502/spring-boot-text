@@ -22,6 +22,12 @@ public interface BookCategoryRepository {
 	 */
 	BookCategory selectById(int id);
 	/**
+	 * 書籍IDと書籍名で検索
+	 * @param category 書籍カテゴリ
+	 * @return 書籍カテゴリ
+	 */
+	BookCategory selectByIdAndName(BookCategory category);
+	/**
 	 * 1件登録
 	 * @param bookCategory 書籍カテゴリ
 	 * @return 更新結果(true: 成功, false: 失敗)

@@ -75,6 +75,18 @@ public class BookCategoryRepositoryTest {
 		assertEquals(null, repository.selectById(1));
 		repository.selectAll().forEach(System.out::println);
 	}
+	/**
+	 * 1件取得（IDと名前を条件）テスト<br>
+	 * - 正常に取得されているか（IDと名前の場合）<br>
+	 * - 正常に取得されているか（IDだけ場合）<br>
+	 */
+	@Test
+	@Sql({"/schema.sql","/data.sql"})
+	void testSelectByIdAndName() {
+		assertEquals("技術系", repository.selectByIdAndName(new BookCategory(1,"技術系")).getName());
+		assertEquals("技術系", repository.selectByIdAndName(new BookCategory(1,null)).getName());
+		repository.selectAll().forEach(System.out::println);
+	}
 
 
 }
