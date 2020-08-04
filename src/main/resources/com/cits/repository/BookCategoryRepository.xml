@@ -32,6 +32,10 @@
 	</select>
 	<!-- 全件取得（書籍含む）のresultMap -->
 	<resultMap type="BookCategory" id="selectAllCategoryAndBooks">
+		<constructor>
+			<idArg column="c_id" javaType="Integer" />
+			<arg column="c_name" javaType="String" />
+		</constructor>
 		<id property="id" column="c_id" />
 		<result property="name" column="c_name" />
 		<collection property="books" ofType="Book">
