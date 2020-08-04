@@ -28,6 +28,18 @@ public interface BookCategoryRepository {
 	 */
 	BookCategory selectByIdAndName(BookCategory category);
 	/**
+	 * 複数の書籍IDで検索
+	 * @param ids 書籍IDリスト
+	 * @return 書籍リスト
+	 */
+	List<BookCategory> selectByIdIn(List<Integer> ids);
+	/**
+	 * カテゴリ名の部分一致検索
+	 * @param category カテゴリ
+	 * @return 書籍リスト
+	 */
+	List<BookCategory> selectByNameLike(String name);
+	/**
 	 * 1件登録
 	 * @param bookCategory 書籍カテゴリ
 	 * @return 更新結果(true: 成功, false: 失敗)

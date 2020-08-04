@@ -8,3 +8,4 @@ INSERT INTO T_BOOK VALUES(4, '坊ちゃん', '夏目漱石', '可', null, null, 
 -- 書籍カテゴリ
 INSERT INTO T_BOOK_CATEGORY VALUES(1, '技術系');
 INSERT INTO T_BOOK_CATEGORY VALUES(2, '小説');
+-- INSERT INTO T_BOOK_CATEGORY VALUES(3, '芸術系');

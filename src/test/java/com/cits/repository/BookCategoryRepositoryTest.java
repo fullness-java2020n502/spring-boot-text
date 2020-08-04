@@ -2,6 +2,8 @@ package com.cits.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +89,25 @@ public class BookCategoryRepositoryTest {
 		assertEquals("技術系", repository.selectByIdAndName(new BookCategory(1,null)).getName());
 		repository.selectAll().forEach(System.out::println);
 	}
-
+	/**
+	 * 書籍IDリストから取得するテスト<br>
+	 * - 指定したIDの書籍リストを取得できているか<br>
+	 */
+	@Test
+	@Sql({"/schema.sql","/data.sql"})
+	void testSelectByIdIn() {
+		assertEquals(2, repository.selectByIdIn(Arrays.asList(1,2)).size());
+		repository.selectAll().forEach(System.out::println);
+	}
+	/**
+	 * 書籍名から部分一致検索するテスト<br>
+	 * - 指定した文字列の書籍リストを取得できているか<br>
+	 */
+	@Test
+	@Sql({"/schema.sql","/data.sql"})
+	void testSelectByNameLike() {
+		assertEquals(1, repository.selectByNameLike("術").size());
+		assertEquals(0, repository.selectByNameLike("雑誌").size());
+	}
 
 }
