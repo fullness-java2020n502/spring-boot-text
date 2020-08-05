@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>書籍登録完了</title>
@@ -7,6 +7,17 @@
 </head>
 <body>
 	<h1>書籍登録完了</h1>
+	<p>下記を登録しました。</p>
+	<table th:object="${bookForm}">
+		<tr>
+			<th>タイトル</th>
+			<td th:text="*{title}"></td>
+		</tr>
+		<tr>
+			<th>著者</th>
+			<td th:text="*{author}"></td>
+		</tr>
+	</table>
 	<a href="/book-list">一覧に戻る</a>
 </body>
 </html>

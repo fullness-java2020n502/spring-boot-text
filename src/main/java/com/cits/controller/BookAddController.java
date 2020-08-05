@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cits.form.BookForm;
-import com.cits.value.Book;
 
 /**
  * 書籍登録機能コントローラー
@@ -31,17 +31,23 @@ public class BookAddController {
 		return "book-add/input";
 	}
 	@PostMapping("confirm")
-	public String confirm(@ModelAttribute("bookAddForm") BookForm book,Model model) {
+	public String confirm(@ModelAttribute("bookAddForm") BookForm bookAddForm) {
 		return "book-add/confirm";
 	}
 	@PostMapping("execute")
-	public String Execute() {
+	public String Execute(
+			@ModelAttribute("bookAddForm") BookForm bookForm,
+			RedirectAttributes attributes
+		) {
+		System.out.println("bookForm:" + bookForm);
+		attributes.addFlashAttribute("bookForm",bookForm);
 		// TODO DB登録処理
 		return "redirect:complete"; // <- リダイレクト（PRG）
 	}
 	@GetMapping("complete")
-	public String complete(SessionStatus status) {
+	public String complete(SessionStatus status, BookForm bookForm, Model model) {
 		status.setComplete(); // <- セッションを破棄
+		model.addAttribute("bookForm",bookForm);
 		return "book-add/complete";
 	}
 }
