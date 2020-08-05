@@ -7,14 +7,14 @@
 </head>
 <body>
 	<h1>書籍登録確認</h1>
-	<table>
+	<table th:object="${book}"><!-- ← オブジェクトを指定 -->
 		<tr>
 			<td>タイトル</td>
-			<td th:text="${title}"></td>
+			<td th:text="*{title}"></td> <!-- ← フィールド名のみの指定 -->
 		</tr>
 		<tr>
 			<td>著者</td>
-			<td th:text="${author}"></td>
+			<td th:text="*{author}"></td>
 		</tr>
 	</table>
 	<form action="/book-add/execute" method="post">

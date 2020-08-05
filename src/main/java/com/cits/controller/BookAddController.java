@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cits.value.Book;
+
 /**
  * 書籍登録機能コントローラー
  * @author imagepit
@@ -19,13 +21,8 @@ public class BookAddController {
 		return "book-add/input";
 	}
 	@PostMapping("confirm")
-	public String confirm(
-		String title,
-		String author,
-		Model model
-	) {
-		model.addAttribute("title",title);
-		model.addAttribute("author",author);
+	public String confirm(Book book,Model model) {
+		model.addAttribute("book",book);
 		return "book-add/confirm";
 	}
 	@PostMapping("execute")
