@@ -14,7 +14,10 @@ public class BookListController {
 	@Autowired BookRepository bookRepository;
 	@GetMapping
 	public String bookList(Model model) {
-		model.addAttribute("bookList",bookRepository.selectAll());
+		model.addAttribute(
+				"bookList",
+				bookRepository.selectAllWithCategory()
+		);
 		return "book-list/index";
 	}
 }

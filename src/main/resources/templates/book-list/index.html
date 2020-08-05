@@ -14,16 +14,18 @@
 			<th>タイトル</th>
 			<th>著者</th>
 			<th>貸出状況</th>
+			<th>カテゴリ</th>
 			<th>更新</th>
 		</tr>
-		<tr th:each="book : ${bookList}">
-			<td th:text="${book.id}"></td>
-			<td th:text="${book.title}"></td>
-			<td th:text="${book.author}"></td>
-			<td th:text="${book.status}"></td>
+		<tr th:each="book : ${bookList}" th:object="${book}">
+			<td th:text="*{id}"></td>
+			<td th:text="*{title}"></td>
+			<td th:text="*{author}"></td>
+			<td th:text="*{status}"></td>
+			<td th:text="*{category.name}"></td>
 			<td>
 				<!-- Thymeleafを使って動的にURLを生成 -->
-				<a th:href="@{/book-rent/__${book.id}__}">
+				<a th:href="@{/book-rent/__*{id}__}">
 					<button>更新</button>
 				</a>
 			</td>
