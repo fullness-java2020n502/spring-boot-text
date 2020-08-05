@@ -115,7 +115,7 @@ public class BookCategoryRepositoryTest {
 	 */
 	@Test
 	@Sql({"/schema.sql","/data.sql"})
-	void selectAllCategoryAndBooks() {
+	void testSelectAllCategoryAndBooks() {
 		repository.selectAllCategoryAndBooks().forEach(System.out::println);
 	}
 

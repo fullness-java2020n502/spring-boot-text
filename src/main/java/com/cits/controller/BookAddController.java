@@ -2,6 +2,8 @@ package com.cits.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +33,11 @@ public class BookAddController {
 		return "book-add/input";
 	}
 	@PostMapping("confirm")
-	public String confirm(@ModelAttribute("bookAddForm") BookForm bookAddForm) {
+	public String confirm(
+			@Validated @ModelAttribute("bookAddForm") BookForm bookAddForm,
+			BindingResult result
+	) {
+		if(result.hasErrors()) return "book-add/input";
 		return "book-add/confirm";
 	}
 	@PostMapping("execute")
@@ -47,6 +53,7 @@ public class BookAddController {
 	@GetMapping("complete")
 	public String complete(SessionStatus status, BookForm bookForm, Model model) {
 		status.setComplete(); // <- セッションを破棄
+		System.out.println("bookForm:"+bookForm);
 		model.addAttribute("bookForm",bookForm);
 		return "book-add/complete";
 	}

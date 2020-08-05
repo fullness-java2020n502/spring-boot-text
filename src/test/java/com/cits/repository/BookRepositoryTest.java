@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.cits.value.Book;
@@ -25,22 +26,24 @@ public class BookRepositoryTest {
 	@Test
 	void 一件取得の確認() {
 		Book book = repository.selectById(1);
-		//assertEquals("高橋麻奈", book.getAuthor());
+		assertEquals("高橋麻奈", book.getAuthor());
 	}
 	@Test
 	void 主キーの最大値を取得() {
 		// assertEquals(4, repository.selectMaxIdValue());
 	}
 	@Test
+	@Sql({"/schema.sql","/data.sql"})
 	void 登録確認() {
 		repository.insert(new Book(repository.selectMaxIdValue(), "タイトル1", "著者1", "可"));
-		repository.selectAll().forEach(System.out::println);
+		assertEquals(5, repository.selectAll().size());
 	}
 	@Test
+	@Sql({"/schema.sql","/data.sql"})
 	void 更新確認() {
 		Book book = new Book(1, "やさしいJava2", "高橋2", "不可");
 		repository.update(book);
-		repository.selectAll().forEach(System.out::println);
+		assertEquals("高橋2", repository.selectById(1).getAuthor());
 	}
 	@Test
 	void testSelectAllWithCategory() {
