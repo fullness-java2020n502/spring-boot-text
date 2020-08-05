@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>書籍登録確認</h1>
-	<table th:object="${book}"><!-- ← オブジェクトを指定 -->
+	<table th:object="${bookAddForm}"><!-- ← オブジェクトを指定 -->
 		<tr>
 			<td>タイトル</td>
 			<td th:text="*{title}"></td> <!-- ← フィールド名のみの指定 -->
@@ -20,5 +20,6 @@
 	<form action="/book-add/execute" method="post">
 	<input type="submit" value="登録" />
 	</form>
+	<a href="input">戻る</a>
 </body>
 </html>
