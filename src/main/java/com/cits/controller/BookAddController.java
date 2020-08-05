@@ -1,27 +1,40 @@
 package com.cits.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 書籍登録機能コントローラー
  * @author imagepit
  */
 @Controller
-@RequestMapping("book-add") // 「http://localhost:8080/book-add」のURLでリクエストされたら呼ばれる
+@RequestMapping("book-add")
 public class BookAddController {
-	@GetMapping("input") //  「http://localhost:8080/book-add/input」のURLでGETリクエストされたら呼ばれる
+	@GetMapping("input")
 	public String input() {
-		return "book-add/input"; // 「resource/templetes/book-add/input.html」のViewでレスポンス
+		return "book-add/input";
 	}
-	@PostMapping("confirm") // 「http://localhost:8080/book-add/confirm」のURLでPOSTリクエストされたら呼ばれる
-	public String confirm() {
-		return "book-add/confirm";// 「resource/templetes/book-add/confirm.html」のViewでレスポンス
+	@PostMapping("confirm")
+	public String confirm(
+		String title,
+		String author,
+		Model model
+	) {
+		model.addAttribute("title",title);
+		model.addAttribute("author",author);
+		return "book-add/confirm";
 	}
-	@PostMapping("complete") // 「http://localhost:8080/book-add/complete」のURLでPOSTリクエストされたら呼ばれる
+	@PostMapping("execute")
+	public String Execute() {
+		// TODO DB登録処理
+		return "redirect:complete"; // <- リダイレクト（PRG）
+	}
+	@GetMapping("complete")
 	public String complete() {
-		return "book-add/complete";// 「resource/templetes/book-add/complete.html」のViewでレスポンス
+		return "book-add/complete";
 	}
 }
