@@ -11,10 +11,10 @@ import com.cits.repository.BookRepository;
 @Controller
 @RequestMapping("book-list")
 public class BookListController {
-	@Autowired BookRepository repository;
+	@Autowired BookRepository bookRepository;
 	@GetMapping
 	public String bookList(Model model) {
-		model.addAttribute("bookList",repository.selectAll());
+		model.addAttribute("bookList",bookRepository.selectAll());
 		return "book-list/index";
 	}
 }

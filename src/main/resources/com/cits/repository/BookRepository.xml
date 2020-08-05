@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cits.repository.BookRepository">
+	<resultMap type="Book" id="selectAllWithCategory">
+		<constructor>
+			<idArg javaType="Integer" column="b_id"/>
+			<arg javaType="String" column="b_title" />
+			<arg javaType="String" column="b_author" />
+			<arg javaType="String" column="b_status" />
+		</constructor>
+		<result property="startDate" column="b_start_date"/>
+		<result property="endDate" column="b_end_date"/>
+		<association property="category" javaType="BookCategory">
+			<constructor>
+				<idArg column="c_id" javaType="Integer" />
+				<arg column="c_name" javaType="String" />
+			</constructor>
+		</association>
+	</resultMap>
+	<select id="selectAllWithCategory" resultMap="selectAllWithCategory">
+		select
+			b.id b_id,
+			b.title b_title,
+			b.author b_author,
+			b.status b_status,
+			b.start_date b_start_date,
+			b.end_date b_end_date,
+			c.id c_id,
+			c.name c_name
+		from
+			t_book b
+		join
+			t_book_category c
+		on
+			b.category_id = c.id
+	</select>
+</mapper>

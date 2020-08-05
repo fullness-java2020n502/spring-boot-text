@@ -33,13 +33,18 @@ public class BookRepositoryTest {
 	}
 	@Test
 	void 登録確認() {
-		repository.insert(new Book(repository.selectMaxIdValue(), "タイトル1", "著者1", "可", Date.valueOf("2020-08-01"), Date.valueOf("2020-08-08")));
+		repository.insert(new Book(repository.selectMaxIdValue(), "タイトル1", "著者1", "可"));
 		repository.selectAll().forEach(System.out::println);
 	}
 	@Test
 	void 更新確認() {
-		Book book = new Book(1, "やさしいJava2", "高橋2", "不可", Date.valueOf("2020-08-01"), Date.valueOf("2020-08-08"));
+		Book book = new Book(1, "やさしいJava2", "高橋2", "不可");
 		repository.update(book);
 		repository.selectAll().forEach(System.out::println);
+	}
+	@Test
+	void testSelectAllWithCategory() {
+		repository.selectAllWithCategory()
+			.forEach(System.out::println);
 	}
 }

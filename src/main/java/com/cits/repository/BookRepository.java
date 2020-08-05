@@ -18,10 +18,15 @@ public interface BookRepository {
 	List<Book> selectAll();
 	@Select("select id, title, author, status, start_date as startDate, end_date as endDate from t_book where id = #{id}")
 	Book selectById(int id);
-	@Select("select coalesce(max(id))+1 from t_book")
+	@Select("select coalesce(max(id),0)+1 from t_book")
 	int selectMaxIdValue();
 	@Insert("insert into t_book values(#{id},#{title},#{author},#{status},#{startDate},#{endDate})")
 	void insert(Book book);
 	@Update("update t_book set title = #{title}, author = #{author}, status = #{status}, start_date = #{startDate}, end_date = #{endDate} where id = #{id}")
 	void update(Book book);
+	/**
+	 * 全件取得（書籍カテゴリも含む）
+	 * @return 書籍リスト（書籍カテゴリ含む）
+	 */
+	List<Book> selectAllWithCategory();
 }
