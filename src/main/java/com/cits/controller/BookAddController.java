@@ -2,6 +2,7 @@ package com.cits.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cits.form.BookForm;
 import com.cits.form.BookFormValidator;
+import com.cits.value.Book;
 
 /**
  * 書籍登録機能コントローラー
@@ -67,19 +69,19 @@ public class BookAddController {
 		return "book-add/confirm";
 	}
 
+	// @Autowired ModelMapper modelMapper; // ModelMapperをDI
 
 	@PostMapping("execute")
 	public String Execute(
 			@ModelAttribute("bookAddForm") BookForm bookForm,
 			RedirectAttributes attributes
 		) {
-		System.out.println("bookForm:" + bookForm);
-		// セッションのデータを取得
-		// BookForm bookForm2 =  (BookForm)session.getAttribute("sessForm");
-		// System.out.println("bookForm2"+bookForm2);
-
 		attributes.addFlashAttribute("bookForm",bookForm);
-		// TODO DB登録処理
+		// ModelMapperを使ってFormからEntityに変換
+		ModelMapper modelMapper = new ModelMapper();
+		Book book = modelMapper.map(bookForm, Book.class);
+		System.out.println("book:" + book);
+		// TODO DBに登録
 		return "redirect:complete"; // <- リダイレクト（PRG）
 	}
 	@GetMapping("complete")

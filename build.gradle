@@ -33,6 +33,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	// spring boot
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.3'
+	// model mapper
+	compile group: 'org.modelmapper.extensions', name: 'modelmapper-spring', version: '1.1.0'
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
