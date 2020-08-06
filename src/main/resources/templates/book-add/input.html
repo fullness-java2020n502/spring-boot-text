@@ -16,7 +16,8 @@
 		</div>
 		<table>
 			<tr>
-				<td>タイトル</td>
+				<!-- ↓ messages.propertiesから文字列を表示 -->
+				<td th:text="#{bookAddForm.title}"></td>
 				<td>
 					<input type="text" th:field="*{title}" /><br>
 					<!-- 単項目毎にエラーを表示 -->
@@ -24,7 +25,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td>著者</td>
+				<!-- ↓ messages.propertiesから文字列を表示 -->
+				<td th:text="#{bookAddForm.author}"></td>
 				<td>
 					<input type="text" th:field="*{author}" /><br>
 					<span class="error" th:errors="*{author}"></span>
