@@ -25,6 +25,13 @@ public class BookFormValidator implements Validator{
 			errors.rejectValue("title", "bookAddForm.titleAndAuthorError");
 			errors.rejectValue("author", "bookAddForm.titleAndAuthorError");
 		}
+		// ファイルのチェック
+		if(form.getFile().getOriginalFilename().isEmpty()) {
+			errors.rejectValue("file","bookAddForm.file.notSelected");
+		}
+		if(!form.getFile().getContentType().startsWith("image")) {
+			errors.rejectValue("file","bookAddForm.file.notImage");
+		}
 	}
 
 }

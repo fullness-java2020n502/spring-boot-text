@@ -1,5 +1,7 @@
 package com.cits.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.modelmapper.ModelMapper;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cits.form.BookForm;
 import com.cits.form.BookFormValidator;
+import com.cits.helper.FileUploadHelper;
 import com.cits.service.BookService;
 import com.cits.value.Book;
 
@@ -55,6 +58,7 @@ public class BookAddController {
 	// HttpSessionはDIで呼び出せます
 	@Autowired HttpSession session;
 
+	@Autowired FileUploadHelper fileUploadHelper;
 
 	@PostMapping("confirm")
 	public String confirm(
@@ -62,11 +66,17 @@ public class BookAddController {
 		@Validated @ModelAttribute("bookAddForm") BookForm bookAddForm,
 		// ↓ 3. バリデート結果を格納するオブジェクトを引数に用意
 		BindingResult result
-	) {
+	){
 		// 4. バリデート結果の評価
 		if(result.hasErrors()) return "book-add/input";
-		// セッションに格納
-		// session.setAttribute("sessForm", bookAddForm);
+		// ファイルアップロード
+		try {
+			fileUploadHelper.multipartToFile(bookAddForm.getFile());
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return "book-add/confirm";
 	}
 

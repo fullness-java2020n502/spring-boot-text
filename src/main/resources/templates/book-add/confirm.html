@@ -16,6 +16,10 @@
 			<td>著者</td>
 			<td th:text="*{author}"></td>
 		</tr>
+		<tr>
+			<td>画像</td>
+			<td><img th:src="@{/img/__*{file.getOriginalFilename()}__}" /></td>
+		</tr>
 	</table>
 	<form action="/book-add/execute" method="post">
 	<input type="submit" value="登録" />

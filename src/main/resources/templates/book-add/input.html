@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>書籍登録入力</h1>
-	<form action="/book-add/confirm" method="post" th:object="${bookAddForm}">
+	<form action="/book-add/confirm" method="post" th:object="${bookAddForm}" enctype="multipart/form-data">
 		<!-- エラーメッセージを表示（纏めて） -->
 		<div class="error" th:if="${#fields.hasAnyErrors()}">
 			<ul>
@@ -30,6 +30,13 @@
 				<td>
 					<input type="text" th:field="*{author}" /><br>
 					<span class="error" th:errors="*{author}"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>画像</td>
+				<td>
+					<input type="file" th:field="*{file}" /><br>
+					<span class="error" th:errors="*{file}"></span>
 				</td>
 			</tr>
 		</table>
