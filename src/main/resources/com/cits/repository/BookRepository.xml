@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cits.repository.BookRepository">
+<mapper namespace="com.cits.repository.BookMapper">
 	<resultMap type="Book" id="selectAllWithCategory">
 		<constructor>
 			<idArg javaType="Integer" column="b_id"/>

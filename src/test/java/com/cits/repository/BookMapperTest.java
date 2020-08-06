@@ -16,8 +16,8 @@ import lombok.Data;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-public class BookRepositoryTest {
-	@Autowired BookRepository repository;
+public class BookMapperTest {
+	@Autowired BookMapper repository;
 	@Test
 	void 全件取得の確認() {
 		repository.selectAll().forEach(System.out::println);

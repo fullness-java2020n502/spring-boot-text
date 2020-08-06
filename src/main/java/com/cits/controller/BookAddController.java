@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cits.form.BookForm;
 import com.cits.form.BookFormValidator;
+import com.cits.service.BookService;
 import com.cits.value.Book;
 
 /**
@@ -69,7 +70,7 @@ public class BookAddController {
 		return "book-add/confirm";
 	}
 
-	// @Autowired ModelMapper modelMapper; // ModelMapperをDI
+	@Autowired BookService bookService;
 
 	@PostMapping("execute")
 	public String Execute(
@@ -81,7 +82,8 @@ public class BookAddController {
 		ModelMapper modelMapper = new ModelMapper();
 		Book book = modelMapper.map(bookForm, Book.class);
 		System.out.println("book:" + book);
-		// TODO DBに登録
+		// Serviceを読んでDBに登録
+		bookService.addBook(book);
 		return "redirect:complete"; // <- リダイレクト（PRG）
 	}
 	@GetMapping("complete")
