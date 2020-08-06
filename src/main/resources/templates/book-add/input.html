@@ -8,17 +8,26 @@
 <body>
 	<h1>書籍登録入力</h1>
 	<form action="/book-add/confirm" method="post" th:object="${bookAddForm}">
+		<!-- エラーメッセージを表示（纏めて） -->
+		<div class="error" th:if="${#fields.hasAnyErrors()}">
+			<ul>
+				<li th:each="e : ${#fields.detailedErrors()}">[[${e.message}]]</li>
+			</ul>
+		</div>
 		<table>
 			<tr>
 				<td>タイトル</td>
 				<td>
-				<input type="text" th:field="*{title}" />
+					<input type="text" th:field="*{title}" /><br>
+					<!-- 単項目毎にエラーを表示 -->
+					<span class="error" th:errors="*{title}"></span>
 				</td>
 			</tr>
 			<tr>
 				<td>著者</td>
 				<td>
-				<input type="text" th:field="*{author}" />
+					<input type="text" th:field="*{author}" /><br>
+					<span class="error" th:errors="*{author}"></span>
 				</td>
 			</tr>
 		</table>
