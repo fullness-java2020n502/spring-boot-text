@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cits.form.BookForm;
+import com.cits.form.BookFormValidator;
 
 /**
  * 書籍登録機能コントローラー
@@ -36,6 +39,16 @@ public class BookAddController {
 	public String input() {
 		return "book-add/input";
 	}
+
+	// バリデータをDI
+	@Autowired
+	BookFormValidator bookFormValidator;
+	// バリデータをこのコントローラーに登録
+	@InitBinder("bookAddForm")
+	public void InitBinder(WebDataBinder binder) {
+		binder.addValidators(bookFormValidator);
+	}
+
 	// HttpSessionはDIで呼び出せます
 	@Autowired HttpSession session;
 
